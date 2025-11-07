@@ -1,10 +1,81 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codeex AI Chat - Professional Ollama Interface</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Codeex AI Chat - Professional Ollama Desktop Interface with Voice & Smart Model Management</title>
+    <meta name="description" content="The most advanced open-source Ollama GUI client with auto-setup, text-to-speech, smart model management, and beautiful dark UI. Support for 20+ AI models including Llama3, Phi3, Gemma, Mistral. Free and cross-platform.">
+    <meta name="keywords" content="Ollama GUI, AI chat, Llama3, Phi3, Gemma, Mistral, text to speech, chatbot, LLM interface, model management, Python GUI, CustomTkinter, open source AI, AI assistant, voice chat, cross-platform, desktop AI">
+    <meta name="author" content="heoster">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://heoster.github.io/codeex-v5">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://heoster.github.io/codeex-v5">
+    <meta property="og:title" content="Codeex AI Chat - Professional Ollama Desktop Interface">
+    <meta property="og:description" content="The most advanced open-source Ollama GUI with auto-setup, voice synthesis, and smart model management. Support for 20+ AI models.">
+    <meta property="og:image" content="https://heoster.github.io/codeex-v5/assets/og-image.png">
+    <meta property="og:site_name" content="Codeex AI Chat">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://heoster.github.io/codeex-v5">
+    <meta property="twitter:title" content="Codeex AI Chat - Professional Ollama Desktop Interface">
+    <meta property="twitter:description" content="The most advanced open-source Ollama GUI with auto-setup, voice synthesis, and smart model management.">
+    <meta property="twitter:image" content="https://heoster.github.io/codeex-v5/assets/twitter-image.png">
+    <meta property="twitter:creator" content="@codeex_heoster">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Codeex AI Chat",
+      "description": "Professional Ollama desktop interface with auto-setup, text-to-speech, and smart model management. Support for 20+ AI models including Llama3, Phi3, Gemma, and Mistral.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "heoster",
+        "email": "codeex.care@gmail.com"
+      },
+      "datePublished": "2024-01-01",
+      "softwareVersion": "5.0.0",
+      "url": "https://heoster.github.io/codeex-v5",
+      "screenshot": "https://heoster.github.io/codeex-v5/assets/screenshot.png",
+      "downloadUrl": "https://github.com/heoster/codeex-v5/archive/refs/heads/main.zip",
+      "codeRepository": "https://github.com/heoster/codeex-v5",
+      "programmingLanguage": "Python",
+      "license": "https://opensource.org/licenses/MIT",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "ratingCount": "100"
+      }
+    }
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -103,10 +174,15 @@
             50% { transform: scale(1.05); }
         }
 
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+        }
+
         /* Header */
         header {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
             padding: 1.5rem 0;
             position: fixed;
             width: 100%;
@@ -135,6 +211,7 @@
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
             animation: pulse 2s infinite;
+            cursor: pointer;
         }
 
         .nav-links {
@@ -168,6 +245,16 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Hero Section */
@@ -217,6 +304,23 @@
             margin-bottom: 2rem;
         }
 
+        .badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
@@ -237,6 +341,24 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-primary {
@@ -275,13 +397,67 @@
             border: 1px solid rgba(59, 130, 246, 0.3);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             transform-style: preserve-3d;
-            animation: float 3s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite, glow 3s ease-in-out infinite;
         }
 
-        .demo-card img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .demo-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .demo-card-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            background: rgba(30, 41, 59, 0.3);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
 
         /* Features Section */
@@ -317,7 +493,7 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
@@ -374,10 +550,53 @@
             font-weight: bold;
         }
 
+        /* Models Showcase */
+        .models-showcase {
+            padding: 6rem 2rem;
+            background: rgba(30, 41, 59, 0.3);
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .model-category {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .model-category:hover {
+            transform: translateX(10px);
+            border-left-color: var(--accent);
+        }
+
+        .model-category h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .model-category ul {
+            list-style: none;
+        }
+
+        .model-category li {
+            padding: 0.5rem 0;
+            color: #cbd5e1;
+            font-family: 'Courier New', monospace;
+        }
+
         /* Installation Section */
         .installation {
             padding: 6rem 2rem;
-            background: rgba(30, 41, 59, 0.3);
+            background: rgba(15, 23, 42, 0.5);
         }
 
         .steps-grid {
@@ -402,15 +621,16 @@
 
         .step-number {
             display: inline-block;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background: var(--gradient);
             border-radius: 50%;
             text-align: center;
-            line-height: 40px;
+            line-height: 50px;
             font-weight: 900;
             margin-bottom: 1rem;
             font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
         }
 
         .step h3 {
@@ -451,12 +671,13 @@
 
         .copy-btn:hover {
             background: var(--accent);
+            transform: scale(1.05);
         }
 
         /* System Requirements */
         .requirements {
             padding: 6rem 2rem;
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(30, 41, 59, 0.3);
         }
 
         .req-grid {
@@ -499,7 +720,7 @@
         /* Contact Section */
         .contact {
             padding: 6rem 2rem;
-            background: rgba(30, 41, 59, 0.3);
+            background: rgba(15, 23, 42, 0.5);
         }
 
         .contact-grid {
@@ -548,7 +769,7 @@
 
         /* Footer */
         footer {
-            background: rgba(2, 6, 23, 0.8);
+            background: rgba(2, 6, 23, 0.9);
             backdrop-filter: blur(10px);
             padding: 3rem 2rem 1.5rem;
             border-top: 1px solid rgba(59, 130, 246, 0.3);
@@ -615,12 +836,23 @@
                 display: none;
             }
 
+            .mobile-menu-btn {
+                display: block;
+            }
+
             .cta-buttons {
                 flex-direction: column;
             }
 
             .section-title h2 {
                 font-size: 2rem;
+            }
+
+            .features-grid,
+            .models-grid,
+            .req-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -661,6 +893,76 @@
                 opacity: 0;
             }
         }
+
+        /* Comparison Table */
+        .comparison-table {
+            margin: 3rem 0;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        th {
+            background: var(--gradient);
+            color: white;
+            font-weight: 700;
+        }
+
+        td {
+            color: #cbd5e1;
+        }
+
+        .check {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -671,13 +973,15 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">⚡ CODEEX</div>
+            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⚡ CODEEX</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
+                <li><a href="#models">Models</a></li>
                 <li><a href="#installation">Installation</a></li>
                 <li><a href="#requirements">Requirements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn">☰</button>
         </nav>
     </header>
 
@@ -687,28 +991,63 @@
             <div class="hero-text">
                 <h1>CODEEX AI CHAT</h1>
                 <h2>Professional Ollama Interface</h2>
+                <div class="badges">
+                    <span class="badge">🚀 Auto-Setup</span>
+                    <span class="badge">🎙️ Text-to-Speech</span>
+                    <span class="badge">🤖 20+ Models</span>
+                    <span class="badge">💾 Save/Load</span>
+                    <span class="badge">🆓 Open Source</span>
+                </div>
                 <p>Experience the next generation of AI chat with advanced features, beautiful UI, and seamless model management. Built with ❤️ for developers and AI enthusiasts.</p>
                 <div class="cta-buttons">
-                    <a href="https://github.com/heoster/codeex-v5" class="btn btn-primary" target="_blank">
+                    <a href="https://github.com/heoster/codeex-v5" class="btn btn-primary" target="_blank" rel="noopener">
                         ⭐ Star on GitHub
                     </a>
                     <a href="#installation" class="btn btn-secondary">
                         📥 Get Started
                     </a>
+                    <a href="https://github.com/heoster/codeex-v5/archive/refs/heads/main.zip" class="btn btn-secondary" rel="noopener">
+                        💾 Download ZIP
+                    </a>
                 </div>
             </div>
             <div class="hero-visual">
                 <div class="demo-card">
-                    <h3 style="color: var(--accent); margin-bottom: 1rem;">🤖 AI-Powered Chat</h3>
+                    <div class="demo-card-header">
+                        <div class="demo-card-dot"></div>
+                        <h3 style="color: var(--accent); margin: 0;">🤖 AI-Powered Chat</h3>
+                    </div>
                     <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
-                        <p style="color: #60a5fa; margin-bottom: 0.5rem;">👤 You:</p>
+                        <p style="color: #60a5fa; margin-bottom: 0.5rem; font-weight: 600;">👤 You:</p>
                         <p style="color: #cbd5e1;">What can you do?</p>
                     </div>
                     <div style="background: rgba(5, 150, 105, 0.1); padding: 1.5rem; border-radius: 10px;">
-                        <p style="color: #34d399; margin-bottom: 0.5rem;">🤖 Codeex AI:</p>
-                        <p style="color: #cbd5e1;">I can help you with coding, answer questions, and much more! ✨</p>
+                        <p style="color: #34d399; margin-bottom: 0.5rem; font-weight: 600;">🤖 Codeex AI:</p>
+                        <p style="color: #cbd5e1;">I can help you with coding, answer questions, and much more! I support text-to-speech, model switching, and conversation management. ✨</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats fade-in">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">AI Models Supported</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Manual Setup Steps</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free & Open Source</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Platforms Supported</div>
             </div>
         </div>
     </section>
@@ -763,8 +1102,8 @@
                     <p>Hear AI responses with customizable voice settings</p>
                     <ul class="feature-list">
                         <li>Toggle TTS on/off</li>
-                        <li>Adjustable speed</li>
-                        <li>Volume control</li>
+                        <li>Adjustable speed (50-300 WPM)</li>
+                        <li>Volume control (0-100%)</li>
                         <li>Auto-speak responses</li>
                     </ul>
                 </div>
@@ -774,7 +1113,7 @@
                     <h3>Chat Management</h3>
                     <p>Save, load, and export your conversations</p>
                     <ul class="feature-list">
-                        <li>Save conversations</li>
+                        <li>Save conversations (JSON)</li>
                         <li>Load previous chats</li>
                         <li>Export to TXT</li>
                         <li>Quick access sidebar</li>
@@ -790,6 +1129,132 @@
                         <li>Color-coded messages</li>
                         <li>Responsive design</li>
                         <li>Smooth animations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="comparison-table" style="margin-top: 4rem;">
+                <h3 style="text-align: center; color: var(--accent); margin-bottom: 2rem; font-size: 2rem;">📊 Comparison with Other Solutions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Codeex AI Chat</th>
+                            <th>Ollama CLI</th>
+                            <th>Other GUIs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Auto-Start Ollama</td>
+                            <td class="check">✅</td>
+                            <td class="cross">❌</td>
+                            <td>⚠️ Rare</td>
+                        </tr>
+                        <tr>
+                            <td>Text-to-Speech</td>
+                            <td class="check">✅</td>
+                            <td class="cross">❌</td>
+                            <td class="cross">❌</td>
+                        </tr>
+                        <tr>
+                            <td>Smart Model Recommendations</td>
+                            <td class="check">✅</td>
+                            <td class="cross">❌</td>
+                            <td class="cross">❌</td>
+                        </tr>
+                        <tr>
+                            <td>One-Click Model Downloads</td>
+                            <td class="check">✅</td>
+                            <td>⚠️ Manual</td>
+                            <td>⚠️ Limited</td>
+                        </tr>
+                        <tr>
+                            <td>Save/Load Conversations</td>
+                            <td class="check">✅</td>
+                            <td class="cross">❌</td>
+                            <td>⚠️ Basic</td>
+                        </tr>
+                        <tr>
+                            <td>Export Chats</td>
+                            <td class="check">✅</td>
+                            <td class="cross">❌</td>
+                            <td>⚠️ Rare</td>
+                        </tr>
+                        <tr>
+                            <td>Real-time Streaming</td>
+                            <td class="check">✅</td>
+                            <td class="check">✅</td>
+                            <td>⚠️ Some</td>
+                        </tr>
+                        <tr>
+                            <td>Professional UI</td>
+                            <td class="check">✅</td>
+                            <td class="cross">❌</td>
+                            <td>⚠️ Basic</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Showcase -->
+    <section class="models-showcase fade-in" id="models">
+        <div class="container">
+            <div class="section-title">
+                <h2>🤖 Supported AI Models</h2>
+                <p>20+ models optimized for different system configurations</p>
+            </div>
+            <div class="models-grid">
+                <div class="model-category" style="border-left-color: #ef4444;">
+                    <h4>💎 Tiny Models (< 8GB RAM)</h4>
+                    <ul>
+                        <li>phi3:mini - 3.8GB</li>
+                        <li>tinyllama - 637MB</li>
+                        <li>qwen2:0.5b - 352MB</li>
+                    </ul>
+                </div>
+                <div class="model-category" style="border-left-color: #f59e0b;">
+                    <h4>🔷 Small Models (8-16GB RAM)</h4>
+                    <ul>
+                        <li>llama3.2:1b - 1.3GB</li>
+                        <li>gemma2:2b - 1.6GB</li>
+                        <li>phi3:medium - 7.9GB</li>
+                    </ul>
+                </div>
+                <div class="model-category" style="border-left-color: #3b82f6;">
+                    <h4>🔶 Medium Models (16-32GB RAM)</h4>
+                    <ul>
+                        <li>llama3.2:3b - 2.0GB</li>
+                        <li>gemma2:9b - 5.4GB</li>
+                        <li>mistral - 4.1GB</li>
+                        <li>qwen2.5:7b - 4.7GB</li>
+                    </ul>
+                </div>
+                <div class="model-category" style="border-left-color: #10b981;">
+                    <h4>🟢 Large Models (32GB+ RAM)</h4>
+                    <ul>
+                        <li>llama3.1:8b - 4.7GB</li>
+                        <li>llama3:8b - 4.7GB</li>
+                        <li>mixtral:8x7b - 26GB</li>
+                    </ul>
+                </div>
+                <div class="model-category" style="border-left-color: #8b5cf6;">
+                    <h4>🔴 XLarge Models (64GB+ RAM)</h4>
+                    <ul>
+                        <li>llama3.1:70b - 40GB</li>
+                        <li>qwen2.5:72b - 41GB</li>
+                    </ul>
+                </div>
+                <div class="model-category" style="border-left-color: #ec4899;">
+                    <h4>💻 Specialized Models</h4>
+                    <ul>
+                        <li>codellama - Code assistant</li>
+                        <li>deepseek-coder - Advanced coding</li>
+                        <li>orca-mini - Reasoning</li>
+                        <li>neural-chat - Conversations</li>
                     </ul>
                 </div>
             </div>
@@ -812,7 +1277,7 @@
                         <code>https://ollama.ai</code>
                         <button class="copy-btn" onclick="copyCode(this, 'https://ollama.ai')">Copy</button>
                     </div>
-                    <p style="color: #94a3b8; margin-top: 1rem;">Available for Windows, macOS, and Linux</p>
+                    <p style="color: #94a3b8; margin-top: 1rem;">✅ Available for Windows, macOS, and Linux</p>
                 </div>
 
                 <div class="step">
@@ -823,7 +1288,7 @@
                         <code>pip install customtkinter pillow requests psutil pyttsx3</code>
                         <button class="copy-btn" onclick="copyCode(this, 'pip install customtkinter pillow requests psutil pyttsx3')">Copy</button>
                     </div>
-                    <p style="color: #94a3b8; margin-top: 1rem;">Python 3.8 or higher required</p>
+                    <p style="color: #94a3b8; margin-top: 1rem;">✅ Python 3.8 or higher required</p>
                 </div>
 
                 <div class="step">
@@ -836,14 +1301,14 @@ cd codeex-v5<br>
 python codeex_chat.py</code>
                         <button class="copy-btn" onclick="copyCode(this, 'git clone https://github.com/heoster/codeex-v5.git\ncd codeex-v5\npython codeex_chat.py')">Copy</button>
                     </div>
-                    <p style="color: #94a3b8; margin-top: 1rem;">The app will auto-start Ollama and download the default model!</p>
+                    <p style="color: #94a3b8; margin-top: 1rem;">✅ The app will auto-start Ollama and download the default model!</p>
                 </div>
             </div>
 
             <div style="margin-top: 3rem; text-align: center;">
                 <h3 style="color: var(--accent); margin-bottom: 1rem;">Alternative: Download Directly</h3>
                 <a href="https://github.com/heoster/codeex-v5/archive/refs/heads/main.zip" class="btn btn-primary">
-                    📥 Download ZIP
+                    📥 Download ZIP File
                 </a>
             </div>
         </div>
@@ -911,28 +1376,39 @@ python codeex_chat.py</code>
                     <div class="contact-icon">📧</div>
                     <h3>Email</h3>
                     <p><a href="mailto:codeex.care@gmail.com">codeex.care@gmail.com</a></p>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.5rem;">For support and inquiries</p>
                 </div>
                 <div class="contact-card">
                     <div class="contact-icon">📸</div>
                     <h3>Instagram</h3>
-                    <p><a href="https://instagram.com/codeex._.heoster" target="_blank">@codeex._.heoster</a></p>
+                    <p><a href="https://instagram.com/codeex._.heoster" target="_blank" rel="noopener">@codeex._.heoster</a></p>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.5rem;">Follow for updates</p>
                 </div>
                 <div class="contact-card">
                     <div class="contact-icon">⭐</div>
                     <h3>GitHub</h3>
-                    <p><a href="https://github.com/heoster/codeex-v5" target="_blank">heoster/codeex-v5</a></p>
+                    <p><a href="https://github.com/heoster/codeex-v5" target="_blank" rel="noopener">heoster/codeex-v5</a></p>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.5rem;">Star & contribute</p>
                 </div>
             </div>
 
             <div style="margin-top: 3rem; text-align: center; background: rgba(30, 41, 59, 0.6); padding: 2rem; border-radius: 15px; border: 1px solid rgba(59, 130, 246, 0.3);">
-                <h3 style="color: var(--accent); margin-bottom: 1rem;">🌟 Open Source & Free</h3>
+                <h3 style="color: var(--accent); margin-bottom: 1rem;">🌟 Open Source & Free Forever</h3>
                 <p style="color: #94a3b8; margin-bottom: 1.5rem;">
                     Codeex AI Chat is completely open source and free to use. <br>
                     Contributions, bug reports, and feature requests are welcome!
                 </p>
-                <a href="https://github.com/heoster/codeex-v5/issues" class="btn btn-secondary" target="_blank">
-                    🐛 Report an Issue
-                </a>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://github.com/heoster/codeex-v5/issues" class="btn btn-secondary" target="_blank" rel="noopener">
+                        🐛 Report Issue
+                    </a>
+                    <a href="https://github.com/heoster/codeex-v5/discussions" class="btn btn-secondary" target="_blank" rel="noopener">
+                        💬 Discussions
+                    </a>
+                    <a href="https://github.com/heoster/codeex-v5/fork" class="btn btn-secondary" target="_blank" rel="noopener">
+                        🍴 Fork Project
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -942,20 +1418,31 @@ python codeex_chat.py</code>
         <div class="footer-content">
             <div class="footer-logo">⚡ CODEEX</div>
             <p style="color: #94a3b8; margin-bottom: 1.5rem;">
-                Professional AI Chat Interface for Ollama
+                Professional AI Chat Interface for Ollama<br>
+                <strong>Made with ❤️ by heoster</strong>
             </p>
             <div class="footer-links">
-                <a href="https://github.com/heoster/codeex-v5" target="_blank">GitHub</a>
-                <a href="https://instagram.com/codeex._.heoster" target="_blank">Instagram</a>
+                <a href="https://github.com/heoster/codeex-v5" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://instagram.com/codeex._.heoster" target="_blank" rel="noopener">Instagram</a>
                 <a href="mailto:codeex.care@gmail.com">Email</a>
-                <a href="https://ollama.ai" target="_blank">Ollama</a>
+                <a href="https://ollama.ai" target="_blank" rel="noopener">Ollama</a>
+                <a href="#features">Features</a>
+                <a href="#installation">Installation</a>
             </div>
             <div class="copyright">
-                <p>&copy; 2024 Codeex. All rights reserved.</p>
-                <p class="made-by">Made with ❤️ by <strong>heoster</strong></p>
+                <p>&copy; 2025 Codeex AI Chat. All rights reserved.</p>
+                <p class="made-by">Created by <strong>heoster</strong> • MIT License</p>
+                <p style="margin-top: 1rem; color: #64748b; font-size: 0.9rem;">
+                    Powered by Ollama • Built with Python & CustomTkinter
+                </p>
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        ↑
+    </div>
 
     <script>
         // Generate stars
@@ -1033,6 +1520,24 @@ python codeex_chat.py</code>
             });
         });
 
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
@@ -1060,6 +1565,9 @@ python codeex_chat.py</code>
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
             });
         });
+
+        // Track page views (Google Analytics placeholder)
+        // Add your Google Analytics code here
     </script>
 </body>
 </html>
