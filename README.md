@@ -1,3 +1,8 @@
+# 🚀 Codeex v5
+
+**Codeex v5** is a professional, cross-platform desktop GUI for [Ollama](https://ollama.com/). Built with Python, it offers smart model management, voice synthesis (TTS), real-time streaming, and chat persistence—wrapped in a clean dark interface.
+
+
 ## ✨ Features
 
 - 🎨 **Modern Dark UI:** Clean, intuitive desktop interface built with `customtkinter`.
